@@ -1,6 +1,4 @@
 var SNAKE_BLOCK_SIZE = 20;
-
-
 var snakeHead = {
   x: 100,
   y: 100
@@ -15,9 +13,16 @@ var foodLocation = {
 }
 
 var score={
-	p: -2,
+	p: 0,
 	s: "score:"
 }
+var walls={
+	left:0,
+	right: 400,
+	top: 0,
+	bottom: 400,
+}
+
 
 function setup() {
   createCanvas(400, 400);
@@ -54,6 +59,8 @@ function drawSegment(segment) {
   fill(255);
   rectMode(CENTER);
   rect(segment.x, segment.y, SNAKE_BLOCK_SIZE, SNAKE_BLOCK_SIZE);
+	segment.x=constrain(segment.x, walls.left+10, walls.right-10);
+	segment.y=constrain(segment.y, walls.top+10, walls.bottom-10);
 }  
 
 function moveSnake() {
@@ -90,16 +97,17 @@ function extendSnake() {
   var lastSegment = snakeSegments[snakeSegments.length-1] || snakeHead;
   // duplicate last segment
   snakeSegments.push({x: lastSegment.x, y: lastSegment.y}); 
-	score.p=score.p+1;
-	print(score.p);
+
 }
 
 function checkFoodReached() {
   if (dist(snakeHead.x, snakeHead.y, foodLocation.x, foodLocation.y) == 0) {
     foodLocation.x = SNAKE_BLOCK_SIZE * floor(random(width / SNAKE_BLOCK_SIZE));
     foodLocation.y = SNAKE_BLOCK_SIZE * floor(random(height / SNAKE_BLOCK_SIZE));
-    
+    	score.p=score.p+1;
+	print(score.p);
     // make the snake longer!
     extendSnake();
+		
   }
 }
