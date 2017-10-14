@@ -1,0 +1,34 @@
+function setup() { 
+  createCanvas(1200, 400);
+
+}
+	var triangles={
+		x: 200,
+		y:400,
+		b:0,
+		c:0,
+		times: 0,
+		draw:function(){
+	 beginShape();
+		noStroke();
+		fill(200,200,200);
+		vertex(this.x-20-this.b,this.y);
+		vertex(this.x,this.y-40-this.c);
+		vertex(this.x+20+this.b,this.y);
+		vertex(this.x+20+9+this.b,this.y);
+		vertex(this.x,this.y-56-this.c);
+		vertex(this.x-20-9-this.b,this.y);
+		this.b=this.b+15;
+		this.c=this.c+25;
+		this.times=this.times+1;
+		print(this.times);
+	endShape();
+		} 
+	}
+
+function draw(){ 
+if(triangles.times<8){
+ triangles.draw();
+}
+
+}
