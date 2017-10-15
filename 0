@@ -1,0 +1,36 @@
+var colorRR=[170,100,150,30,180,200,70];
+var colorGR=[30,130,120,70,150,70,85];
+var colorBR=[32,75,60,127,108,50,90];
+var colorRL=[85,212,158,129,80,70,200];
+var colorGL=[116,182,21,103,77,46,51];
+var colorBL=[161,42,104,86,138,20,63];
+var arcs=[];
+function setup() { 
+  createCanvas(400, 400);
+	for (var i=0;i<8;i++){
+arcs[i]={
+  x: width/2,
+  y:height/2,
+  w:400,
+  h:400,
+  RR: colorRR[i],
+  GR: colorGR[i],
+  BR: colorBR[i],
+  RL: colorRL[i],
+  GL: colorGL[i],
+  BL: colorBL[i],
+  drawRArc: function(){
+   arc(this.x,this.y,this.w,this.y,PI,CHORD);
+   this.x=this.x+25;
+   fill(this.RR,this.GR,this.BR);
+   }
+  }
+ }
+} 
+
+function draw() { 
+	for (var i=0;i<8;i++){
+  background(220);
+	arcs[i].drawRArc();
+}
+}
