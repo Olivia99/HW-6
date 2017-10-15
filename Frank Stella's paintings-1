@@ -1,5 +1,7 @@
 function setup() { 
   createCanvas(1200, 400);
+	noStroke();
+		colorMode(RGB);
 
 }
 	var triangles={
@@ -10,8 +12,7 @@ function setup() {
 		times: 0,
 		draw:function(){
 	 beginShape();
-		noStroke();
-		fill(200,200,200);
+		fill(90,20,10);
 		vertex(this.x-20-this.b,this.y);
 		vertex(this.x,this.y-40-this.c);
 		vertex(this.x+20+this.b,this.y);
