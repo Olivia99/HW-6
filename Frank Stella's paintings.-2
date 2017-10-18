@@ -1,21 +1,21 @@
 var x=350;
-var y=165;
+var y=155;
 var a=150;
 var w=200;
 var x2=340;
-var y2=165;
+var y2=155;
 
 function setup() { 
-  createCanvas(700, 330);
+  createCanvas(700, 310);
 	  background(0);
 		stroke(255);
-	strokeWeight(5);
+	strokeWeight(1);
 
 
 } 
 
 function draw() { 
-if(a>10){
+if(a>1){
 	line(x,y-a,x,y+a);
 	line(x,y-a,x+w,y-a);
 	line(x+w,y-a,x+w,0);
@@ -26,12 +26,12 @@ if(a>10){
 	line(x2-w,y2-a,x2-w,0);
 	line(x2,y2+a,x2-w,y2+a);
 	line(x2-w,y2+a,x2-w,400);
-	x2=x2-15
-	x=x+15
-	a=a-15
+	x2=x2-5
+	x=x+5
+	a=a-5
+}
 }
 
 
 	
 	
-}
