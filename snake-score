@@ -48,7 +48,6 @@ function draw() {
   // draw food location
   ellipse(foodLocation.x, foodLocation.y, SNAKE_BLOCK_SIZE, SNAKE_BLOCK_SIZE);
 	 text(score.s+ score.p,10,10);
-	checkboundary();
 	dead();
 }
 
@@ -131,38 +130,29 @@ function dead(){
 	}
 }
 
-function checkboundary(){
-	for (var i=0; i<snakeSegments.length; i++){
-		var d=dist(snakeSegments[i].x,snakeSegments[i].y,0,random(0,height));
-		if(d=0){
-			noLoop();
-			textSize(40);
-			textAlign(CENTER);
-			fill(200,0,0);
-			text("GAME OVER!",width/2,height/2);	
-			textSize(20);
-			text("Click to Start Over", width/2, height/2+30);
-		}
-		var d2=dist(snakeSegments[i].x,snakeSegments[i].y,random(0,width),0);
-		if(d=0){
-			noLoop();
-			textSize(40);
-			textAlign(CENTER);
-			fill(200,0,0);
-			text("GAME OVER!",width/2,height/2);
-			textSize(20);
-			text("Click to Start Over", width/2, height/2-50);
-		}
-	}
+function mouseClicked(){
+	startOver();
+	loop();
+}
+function startOver(){
+  createCanvas(400, 400);
+  frameRate(2);
+  
+  // add 2 segments
+  extendSnake();
+  extendSnake();
+  
+  background(0);
+		snakeHead = {
+  x: 100,
+  y: 100
+}
+  drawSegment(snakeHead);
+	
+	snakeSegments = [];
+	 extendSnake();
+	snakeDirection = "right";
+
 }
 
-// function mouseClicked(){
-// 	startOver();
-// }
-// function startOver(){
-//   background(0);
-// 	 drawSegment(snakeHead);
-// 	 extendSnake();
-//   extendSnake();
-// }
 
