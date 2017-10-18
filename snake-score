@@ -16,12 +16,6 @@ var score={
 	p: 0,
 	s: "score:"
 }
-var walls={
-	left:0,
-	right: 400,
-	top: 0,
-	bottom: 400,
-}
 
 
 function setup() {
@@ -44,14 +38,18 @@ function draw() {
 
   // draw snake head
   drawSegment(snakeHead);
+	
+	
     
   // draw snake body
   snakeSegments.forEach(drawSegment);
+	
   
   // draw food location
   ellipse(foodLocation.x, foodLocation.y, SNAKE_BLOCK_SIZE, SNAKE_BLOCK_SIZE);
 	 text(score.s+ score.p,10,10);
-	checkBoundary();
+	checkboundary();
+	dead();
 }
 
 
@@ -60,8 +58,8 @@ function drawSegment(segment) {
   fill(255);
   rectMode(CENTER);
   rect(segment.x, segment.y, SNAKE_BLOCK_SIZE, SNAKE_BLOCK_SIZE);
-	segment.x=constrain(segment.x, walls.left+10, walls.right-10);
-	segment.y=constrain(segment.y, walls.top+10, walls.bottom-10);
+	segment.x=constrain(segment.x, 0, width-20);
+	segment.y=constrain(segment.y,0, height-20);
 }
 
 function moveSnake() {
@@ -100,17 +98,14 @@ function extendSnake() {
   snakeSegments.push({x: lastSegment.x, y: lastSegment.y}); 
 
 }
-function checkBoundary(){
-	  var lastSegment = snakeSegments[snakeSegments.length-1] || snakeHead;
-	if(dist(lastSegment.x,lastSegment.y,walls.left,random(0,height))==0) {
-		noLoop();
-	}
-}
+
 
 function checkFoodReached() {
+	var fx=floor(width / SNAKE_BLOCK_SIZE);
+	var fy=floor(width / SNAKE_BLOCK_SIZE);
   if (dist(snakeHead.x, snakeHead.y, foodLocation.x, foodLocation.y) == 0) {
-    foodLocation.x = SNAKE_BLOCK_SIZE * floor(random(1,width / SNAKE_BLOCK_SIZE));
-    foodLocation.y = SNAKE_BLOCK_SIZE * floor(random(1,height / SNAKE_BLOCK_SIZE));
+    foodLocation.x = SNAKE_BLOCK_SIZE * floor(random(1,fx));
+    foodLocation.y = SNAKE_BLOCK_SIZE * floor(random(1,fy));
     	score.p=score.p+1;
 	print(score.p);
     // make the snake longer!
@@ -120,3 +115,38 @@ function checkFoodReached() {
 		
   }
 }
+
+function dead(){
+	for (var i=0; i<snakeSegments.length; i++){
+		var d=dist(snakeSegments[i].x,snakeSegments[i].y,snakeHead.x,snakeHead.y);
+		if(d<1){
+			noLoop();
+			textSize(40);
+			textAlign(CENTER);
+			fill(200,0,0);
+			text("GAME OVER!",width/2,height/2);
+		}
+	}
+}
+
+function checkboundary(){
+	for (var i=0; i<snakeSegments.length; i++){
+		var d=dist(snakeSegments[i].x,snakeSegments[i].y,0,random(0,height));
+		if(d=0){
+			noLoop();
+			textSize(40);
+			textAlign(CENTER);
+			fill(200,0,0);
+			text("GAME OVER!",width/2,height/2);
+		}
+		var d2=dist(snakeSegments[i].x,snakeSegments[i].y,random(0,width),0);
+		if(d=0){
+			noLoop();
+			textSize(40);
+			textAlign(CENTER);
+			fill(200,0,0);
+			text("GAME OVER!",width/2,height/2);
+		}
+	}
+}
+	
