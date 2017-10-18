@@ -51,6 +51,7 @@ function draw() {
   // draw food location
   ellipse(foodLocation.x, foodLocation.y, SNAKE_BLOCK_SIZE, SNAKE_BLOCK_SIZE);
 	 text(score.s+ score.p,10,10);
+	checkBoundary();
 }
 
 
@@ -61,7 +62,7 @@ function drawSegment(segment) {
   rect(segment.x, segment.y, SNAKE_BLOCK_SIZE, SNAKE_BLOCK_SIZE);
 	segment.x=constrain(segment.x, walls.left+10, walls.right-10);
 	segment.y=constrain(segment.y, walls.top+10, walls.bottom-10);
-}  
+}
 
 function moveSnake() {
   // add snakeHead to front of segments array
@@ -99,15 +100,23 @@ function extendSnake() {
   snakeSegments.push({x: lastSegment.x, y: lastSegment.y}); 
 
 }
+function checkBoundary(){
+	  var lastSegment = snakeSegments[snakeSegments.length-1] || snakeHead;
+	if(dist(lastSegment.x,lastSegment.y,walls.left,random(0,height))==0) {
+		noLoop();
+	}
+}
 
 function checkFoodReached() {
   if (dist(snakeHead.x, snakeHead.y, foodLocation.x, foodLocation.y) == 0) {
-    foodLocation.x = SNAKE_BLOCK_SIZE * floor(random(width / SNAKE_BLOCK_SIZE));
-    foodLocation.y = SNAKE_BLOCK_SIZE * floor(random(height / SNAKE_BLOCK_SIZE));
+    foodLocation.x = SNAKE_BLOCK_SIZE * floor(random(1,width / SNAKE_BLOCK_SIZE));
+    foodLocation.y = SNAKE_BLOCK_SIZE * floor(random(1,height / SNAKE_BLOCK_SIZE));
     	score.p=score.p+1;
 	print(score.p);
     // make the snake longer!
     extendSnake();
+		print(foodLocation.x);
+		print(foodLocation.y);
 		
   }
 }
