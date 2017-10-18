@@ -124,7 +124,9 @@ function dead(){
 			textSize(40);
 			textAlign(CENTER);
 			fill(200,0,0);
-			text("GAME OVER!",width/2,height/2);
+			text("GAME OVER!",width/2,height/2);	
+			textSize(20);
+			text("Click to Start Over", width/2, height/2+30);
 		}
 	}
 }
@@ -137,7 +139,9 @@ function checkboundary(){
 			textSize(40);
 			textAlign(CENTER);
 			fill(200,0,0);
-			text("GAME OVER!",width/2,height/2);
+			text("GAME OVER!",width/2,height/2);	
+			textSize(20);
+			text("Click to Start Over", width/2, height/2+30);
 		}
 		var d2=dist(snakeSegments[i].x,snakeSegments[i].y,random(0,width),0);
 		if(d=0){
@@ -146,7 +150,19 @@ function checkboundary(){
 			textAlign(CENTER);
 			fill(200,0,0);
 			text("GAME OVER!",width/2,height/2);
+			textSize(20);
+			text("Click to Start Over", width/2, height/2-50);
 		}
 	}
 }
-	
+
+// function mouseClicked(){
+// 	startOver();
+// }
+// function startOver(){
+//   background(0);
+// 	 drawSegment(snakeHead);
+// 	 extendSnake();
+//   extendSnake();
+// }
+
